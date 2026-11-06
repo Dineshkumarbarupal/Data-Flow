@@ -1,0 +1,1 @@
+document.addEventListener('DOMContentLoaded', async () => { if (!window.eel) return; try { const response = await eel.get_app_status()(); if (!response?.ok) console.warn('Data-Flow bridge returned an error', response?.error); } catch (error) { console.error('Could not connect to the Python bridge', error); } });
