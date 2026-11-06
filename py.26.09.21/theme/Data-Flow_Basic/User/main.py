@@ -13,9 +13,10 @@ def main() -> None:
     logger = logging.getLogger("dataflow")
     try:
         initialize_database(USER_DIR / "data" / "dataflow.sqlite3")
-        eel.init(str(USER_DIR / "web"), allowed_extensions=[".js", ".html", ".css"])
+        # Serve from User/ so web/index.html can load sibling css/ and js/ assets.
+        eel.init(str(USER_DIR), allowed_extensions=[".js", ".html", ".css"])
         register_system_api()
-        eel.start("index.html", mode="edge", size=(1440, 900), position=(80, 60), block=True)
+        eel.start("web/index.html", mode="edge", size=(1440, 900), position=(80, 60), block=True)
     except Exception:
         logger.exception("Data-Flow failed to start")
         raise
